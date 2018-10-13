@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>MyData - Kumpulan dataset dari berbagai sumber</title>
+
+    {% load static %}
+
+    <link href="{% static 'datasets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'datasets/assets/custom.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4 class="text-white">MyData</h4>
+                    <p class="text-muted">Kami mengumpulkan dataset dari berbagai sumber yang bisa dimanfaatkan secara
+                        umum, untuk berbagai kebutuhan analisis ataupun pembelajaran. Metode pengumpulan data dilakukan
+                        dengan cara <em>crawling</em> data dari berbagai sumber yang terpercaya dan melakukan update
+                        secara berkala.</p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <h4 class="text-white">Contact</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="http://bit.ly/myDataLinkedin" target="_blank" class="text-white">Linkedin</a></li>
+                        <li><a href="mailto:dangs.work@gmail.com" class="text-white">Email me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a href="{% url 'dataset:index' %}" class="navbar-brand d-flex align-items-center">
+                <strong>MyData</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                    aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main role="main">
+    <div class="container">
+        <section class="">
+            <form method="get" action="{% url 'dataset:index' %}">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <input class="form-control" type="text" value="{{ keyword }}" name="keyword" id="keyword" placeholder="keyword">
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12">
+                        <input id="submit" class="btn btn-block btn-warning" type="submit" value="Cari">
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>MyData &copy; 2018, Data yang di sajikan merupakan data yang tersedia secara terbuka, dan bisa di gunakan
+            untuk kepentingan publik.</p>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="{% static 'datasets/assets/popper/popper.min.js' %}"></script>
+<script src="{% static 'datasets/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'datasets/assets/holder/holder.min.js' %}"></script>
+</body>
+</html>

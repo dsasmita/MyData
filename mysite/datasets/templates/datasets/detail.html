@@ -1,0 +1,40 @@
+{% extends 'datasets/base.html' %}
+
+{% block content %}
+{% load humanize %}
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <h5 class="card-header">{{ dataset.title }}</h5>
+                    <div class="card-body">
+                        <p class="card-text">{{ dataset.description }}</p>
+                        <p class="card-text">
+                            <strong>Periode: </strong>
+                            {{ dataset.periode }}<br>
+                            <strong>Sumber Data: </strong>
+                            {{ dataset.source }}<br>
+                            <strong>Total Data: </strong>
+                            {{ dataset.total_rows|intcomma }} baris<br>
+                            <strong>Dilihat: </strong>
+                            {{ dataset.seen_count|intcomma }} kali<br>
+                            <strong>Tags: </strong>
+                            {{ dataset.tags }} baris<br>
+                            <strong>Update Terakhir: </strong>
+                            {{ dataset.updated_at|date:"M d, Y" }}<br>
+                            <strong>Waktu Terbit: </strong>
+                            {{ dataset.published_at }}<br>
+                        </p>
+                        <a href="{% url 'dataset:download' dataset.id %}" class="btn btn-primary btn-block">Unduh Dataset</a>
+                        <small class="text-muted">Telah di  unduh {{ dataset.download_count|intcomma }} kali</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'datasets/base.html' %}
+
+{% block content %}
+{% load humanize %}
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <h5 class="card-header">Download: {{ dataset.title }}</h5>
+                    <div class="card-body">
+                        <center>
+                            <a href="{{ dataset.link }}" class="btn btn-primary">Unduh Sekarang</a><br>
+                            <small class="text-muted">Anda akan di arahkan ke halaman file dataset setelah 5 detik</small>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+setTimeout(function(){
+    window.location = "{{ dataset.link }}";
+}, 2000);
+</script>
+{% endblock %}
