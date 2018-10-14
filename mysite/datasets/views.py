@@ -15,11 +15,11 @@ class HomeView(generic.ListView):
             sch = sch.filter(title__icontains=keyword)
         sorting = self.request.GET.get('sort') or ''
         if sorting == 'popular':
-            sch = sch.order_by('seen_count')
+            sch = sch.order_by('-seen_count')
         elif sorting == 'update':
-            sch = sch.order_by('updated_at')
+            sch = sch.order_by('-updated_at')
         else:
-            sch = sch.order_by('seen_count')
+            sch = sch.order_by('-published_at')
         return sch
 
     def get_context_data(self, **kwargs):
@@ -28,7 +28,7 @@ class HomeView(generic.ListView):
 
         context = super(HomeView, self).get_context_data(**kwargs)
 
-        context['title'] = 'Kajian Terbaru'
+        context['title'] = 'MyData - Dataset Collection'
         context['sort'] = sort
         context['keyword'] = keyword
 
@@ -43,6 +43,9 @@ class DetailView(generic.DetailView):
         context = super(DetailView, self).get_context_data(**kwargs)
         self.object.update_counter_seen()
 
+        context['popular'] = Dataset.objects.order_by('-seen_count')[:5]
+        context['title'] = 'Dataset - ' + self.object.title
+
         return context
 
 class DetailViewDownload(generic.DetailView):
@@ -52,5 +55,7 @@ class DetailViewDownload(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(DetailViewDownload, self).get_context_data(**kwargs)
         self.object.update_counter_download()
+
+        context['title'] = 'Download - ' + self.object.title
 
         return context

@@ -1,5 +1,10 @@
 {% extends 'datasets/base.html' %}
 
+{% block title %} {{ title }} {% endblock %}
+{% block description %}
+    {{dataset.excerpt}}
+{% endblock %}
+
 {% block content %}
 {% load humanize %}
 <div class="album py-5 bg-light">
@@ -32,7 +37,16 @@
                 </div>
             </div>
             <div class="col-md-4">
-
+                <h3>Dataset Popular</h3>
+                {% if popular %}
+                <ul>
+                    {% for pl in popular %}
+                    <li><a href="{% url 'dataset:detail' pl.id %}">{{ pl.title }}</a> <small class="text-muted">(dilihat {{ pl.seen_count|intcomma }} kali)</small></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    tidak ditemukan
+                {% endif %}
             </div>
         </div>
     </div>

@@ -1,5 +1,13 @@
 {% extends 'datasets/base.html' %}
 
+{% block title %} {{ title }} {% endblock %}
+{% block description %}
+    Kami mengumpulkan dataset dari berbagai sumber yang bisa dimanfaatkan secara umum,
+    untuk berbagai kebutuhan analisis ataupun pembelajaran.
+    Metode pengumpulan data dilakukan dengan cara crawling data dari berbagai sumber yang terpercaya
+    dan melakukan update secara berkala.
+{% endblock %}
+
 {% block content %}
 {% load humanize %}
 <div class="album py-5 bg-light">
@@ -19,7 +27,7 @@
                                     <a href="{% url 'dataset:download' dataset.id %}" class="btn btn-sm btn-outline-secondary">Download</a>
                                     <a href="{% url 'dataset:detail' dataset.id %}" class="btn btn-sm btn-outline-secondary">Detail</a>
                                 </div>
-                                <small class="text-muted">{{ dataset.published_at|naturaltime }}</small>
+                                <small class="text-muted">{{ dataset.published_at }}</small>
                             </div>
                         </div>
                     </div>
@@ -27,20 +35,19 @@
                 {% endfor %}
                 <div class="col-md-12">
                     {% if is_paginated %}
-                        <div class="pagination">
+                        <div class="pagination float-left">
                             <span class="page-links">
                                 {% if page_obj.has_previous %}
-                                    <a href="?page={{ page_obj.previous_page_number }}&keyword={{keyword}}" class="btn btn-outline-secondary">prev</a>
+                                    <a href="?page={{ page_obj.previous_page_number }}&keyword={{keyword}}" class="btn btn-secondary">prev</a>
                                 {% endif %}
 
                                 {% if page_obj.has_next %}
-                                    <a href="/?page={{ page_obj.next_page_number }}&keyword={{keyword}}" class="btn btn-outline-secondary">next</a>
+                                    <a href="/?page={{ page_obj.next_page_number }}&keyword={{keyword}}" class="btn btn-secondary">next</a>
                                 {% endif %}
-
-                                <span class="page-current">
-                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                                </span>
                             </span>
+                        </div>
+                        <div class="page-current float-right">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
                         </div>
                     {% endif %}
                 </div>
